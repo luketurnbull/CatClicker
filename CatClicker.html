@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title> Cat Clicker </title>
+
+	<style>
+		html, body {
+			width: 100%; height: 100%;
+			padding: 0; margin: 0;
+		}
+		h1 {
+			padding: 20px;
+			color: #ffd;
+		}
+	</style>
+
+</head>
+
+<body id="body">
+
+	<h1>Clicks: <span id="clicks"></span>.<br />
+		Cats Name: <span id="names"></span>.</h1>
+
+</body>
+
+<script type="text/javascript">
+	
+	var clicks;
+	var names;
+	var totalClicks;
+	var cats = [
+		{
+			"name" : "Tony",
+			"src" : "0.jpeg"
+		},
+		{
+			"name" : "Tom",
+			"src" : "1.jpg"
+		},
+		{
+			"name" : "Jeff",
+			"src" : "2.jpg"
+		},
+		{
+			"name" : "Sheila",
+			"src" : "3.jpg"
+		},
+		{
+			"name" : "Ralph",
+			"src" : "4.jpg"
+		}
+	];
+
+	function init() {
+		clicks = document.getElementById("clicks");
+		names = document.getElementById("names");
+		totalClicks = 0;
+		clicks.innerHTML = totalClicks;
+		names.innerHTML = cats[totalClicks]["name"];
+		document.body.background = cats[0]["src"];
+		document.body.style.backgroundSize = "cover";
+	}
+
+	document.addEventListener('click', function(){
+		totalClicks += 1;
+		clicks.innerHTML = totalClicks;
+		names.innerHTML = cats[totalClicks]["name"];
+		document.body.background = cats[totalClicks]["src"];
+		document.body.style.backgroundSize = "cover";
+	}, false);
+
+	init();
+
+</script>
+
+</html>
