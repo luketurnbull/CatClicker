@@ -39,6 +39,7 @@ $(function(){
 		},
 
 		getCurrentCat: function() {
+			adminView.hide();
 			return model.currentCat;
 		},
 
@@ -51,9 +52,16 @@ $(function(){
 			catView.render();
 		},
 
+		save: function(clicks, name){
+			model.currentCat.clicks = clicks;
+			model.currentCat.name = name;
+			catView.render();
+		},
+
 		init: function() {
 			catView.init();
 			catListView.init();
+			adminView.init();
 		}
 	};
 
@@ -95,7 +103,33 @@ $(function(){
 			    document.getElementById("cats").appendChild(elem);
             });
 		}
+	};
 
+	var adminView = {
+		init: function() {
+			this.nameEdit = document.getElementById("nameEdit");
+			this.clickEdit = document.getElementById("clickEdit");
+			this.adminButton = document.getElementById("admin");
+			this.adminButton.addEventListener('click', function(){
+				adminView.show();
+			});
+			this.save = document.getElementById("save");
+			this.save.addEventListener('click', function(){
+				octopus.save(clickEdit.value, nameEdit.value);
+			});
+			this.adminArea = document.getElementById("adminArea");
+			adminView.hide();
+
+		},
+		show: function() {
+			var currentCat = octopus.getCurrentCat();
+			this.nameEdit.value = currentCat.name;
+			this.clickEdit.value = currentCat.clicks;
+			this.adminArea.style.visibility = 'visible';
+		},
+		hide: function() {
+			this.adminArea.style.visibility = 'hidden';
+		}
 	};
 
 	octopus.init();
